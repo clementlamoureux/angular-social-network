@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angular-social-network', [])
-  .directive('rcSocialNetworkTwitter', function () {
+  .directive('ngSocialNetworkTwitter', function () {
 
     return {
       link: function (scope) {
@@ -26,7 +26,7 @@ angular.module('angular-social-network', [])
         });
       }
     };
-  }).directive('rcSocialNetworkGooglePlus', function () {
+  }).directive('ngSocialNetworkGooglePlus', function () {
 
     return {
       link: function (scope, element) {
@@ -42,7 +42,7 @@ angular.module('angular-social-network', [])
         s.parentNode.insertBefore(po, s);
       }
     };
-  }).directive('rcSocialNetworkPinterest', function () {
+  }).directive('ngSocialNetworkPinterest', function () {
 
     return {
       link: function (scope, element) {
