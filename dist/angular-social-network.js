@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('drupalAngularApp.components.rc-social-network', [])
+angular.module('angular-social-network', [])
   .directive('rcSocialNetworkTwitter', function () {
 
     return {
