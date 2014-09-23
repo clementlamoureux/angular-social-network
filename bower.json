@@ -1,10 +1,17 @@
 {
   "name": "angular-social-network",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "dist/angular-social-network.js",
   "devDependencies": {
     "angular-mocks": "~1.2.0",
     "angular-scenario": "~1.2.0"
   },
-  "appPath": "app"
+  "ignore": [
+    "*",
+    "**/.*",
+    "!/dist/**",
+    "!/bower.json",
+    "!/LICENSE.*",
+    "!/README.*"
+  ]
 }

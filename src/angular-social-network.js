@@ -49,13 +49,14 @@ angular.module('angular-social-network', [])
         window.receiveCount = function (data) {
           return data;
         };
-        var po = document.createElement('script');
-        po.type = 'text/javascript';
-        po.async = true;
-        po.src = '//assets.pinterest.com/js/pinit.js';
-        po.innerHTML = '{lang: "fr"}';
-        var s = element[0];
-        s.parentNode.insertBefore(po, s);
+        var d, e, f;
+        var pinit = function (a, b, c) {
+          d = element[0], e = b.createElement("SCRIPT"), e.type = "text/javascript", e.async = !0, e.src = c, d.parentNode.insertBefore(e, d);
+        };
+        pinit(window, document, "//assets.pinterest.com/js/pinit_main.js");
+        scope.$on('$destroy', function () {
+          element.prev().remove();
+        });
       }
     };
   });
