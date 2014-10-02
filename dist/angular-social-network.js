@@ -42,6 +42,22 @@ angular.module('angular-social-network', [])
         s.parentNode.insertBefore(po, s);
       }
     };
+  }).directive('ngSocialNetworkFacebookShare', function () {
+
+    return {
+      link: function (scope, element, attrs) {
+        element.on('click', function () {
+          var fbShareModelUrl = "http://www.facebook.com/sharer/sharer.php?u=";
+          var urlToShare = fbShareModelUrl += attrs.fbUrl;
+          
+          var w = 600, h = 400;          
+          var left = (screen.width/2)-(w/2);
+          var top = (screen.height/2)-(h/2);
+          
+          window.open(urlToShare,'Facebook','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+w+', height='+h+'');
+        })
+      }
+    };
   }).directive('ngSocialNetworkPinterest', function () {
 
     return {
