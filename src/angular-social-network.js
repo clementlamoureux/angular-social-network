@@ -26,6 +26,62 @@ angular.module('angular-social-network', [])
         });
       }
     };
+  }).directive('ngSocialNetworkFacebookShare', function ($window) {
+
+    return {
+      link: function (scope, element, attrs) {
+        element.on('click', function () {
+          var fbSharingModeUrl = "http://www.facebook.com/sharer/sharer.php?u=";
+          
+          // IF YOU WANT TO SHARE THE CURRENT URL, SET fb-encode-curr-url="true"
+          if (attrs.fbEncodeCurrUrl) {
+            var urlToShare = fbSharingModeUrl + encodeURIComponent($window.location.href);
+          
+          // OR IF YOU WANT TO SHARE A SPECIFIC URL, SET fb-url="http://youtUrl"
+          }else{
+            var urlToShare = fbSharingModeUrl + encodeURIComponent(attrs.fbUrl);
+          }
+          // POPUP SETTINGS
+          var w = 600, h = 400;          
+          var left = (screen.width/2)-(w/2);
+          var top = (screen.height/2)-(h/2);
+          window.open(urlToShare,'Facebook','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+w+', height='+h+'');
+          
+        })
+      }
+    };
+  }).directive('ngSocialNetworkFacebookLike', function () {
+
+    return {
+      link: function (scope, element, attrs) {
+        
+        // CREATE FB DIV
+        var fbElem = document.createElement('div');
+        fbElem.id = "fb-root";
+        element[0].parentNode.insertBefore(fbElem, element[0]);
+        var idScript;
+
+        // FACEBOOK SCRIPT
+        (function(d, s, id) {
+          idScript = id;
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) 
+            return;
+          js = d.createElement(s);
+          js.id = id;
+
+          // PUT YOUR APPID HERE
+          js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=879843195374046&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        // ON DESTROY, DELETE FB SCRIPT & DIV
+        scope.$on('$destroy', function () {
+          angular.element(document.getElementById(idScript)).remove();
+          angular.element(fbElem).remove();
+        });
+      }
+    };
   }).directive('ngSocialNetworkGooglePlus', function () {
 
     return {
@@ -40,22 +96,6 @@ angular.module('angular-social-network', [])
         po.innerHTML = '{lang: "fr"}';
         var s = element[0];
         s.parentNode.insertBefore(po, s);
-      }
-    };
-  }).directive('ngSocialNetworkFacebookShare', function () {
-
-    return {
-      link: function (scope, element, attrs) {
-        element.on('click', function () {
-          var fbShareModelUrl = "http://www.facebook.com/sharer/sharer.php?u=";
-          var urlToShare = fbShareModelUrl += attrs.fbUrl;
-          
-          var w = 600, h = 400;          
-          var left = (screen.width/2)-(w/2);
-          var top = (screen.height/2)-(h/2);
-          
-          window.open(urlToShare,'Facebook','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+w+', height='+h+'');
-        })
       }
     };
   }).directive('ngSocialNetworkPinterest', function () {
