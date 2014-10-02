@@ -71,7 +71,7 @@ angular.module('angular-social-network', [])
           js.id = id;
 
           // PUT YOUR APPID HERE
-          js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=879843195374046&version=v2.0";
+          js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId="+attrs.fbAppid+"&version=v2.0";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
