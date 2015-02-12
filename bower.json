@@ -1,6 +1,6 @@
 {
   "name": "angular-social-network",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "dist/angular-social-network.js",
   "devDependencies": {
     "angular-mocks": "~1.2.0",
