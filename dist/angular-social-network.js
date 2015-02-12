@@ -32,21 +32,21 @@ angular.module('angular-social-network', [])
       link: function (scope, element, attrs) {
         element.on('click', function () {
           var fbSharingModeUrl = "http://www.facebook.com/sharer/sharer.php?u=";
-          
+          var urlToShare;
           // IF YOU WANT TO SHARE THE CURRENT URL, SET fb-encode-curr-url="true"
           if (attrs.fbEncodeCurrUrl) {
-            var urlToShare = fbSharingModeUrl + encodeURIComponent($window.location.href);
-          
+            urlToShare = fbSharingModeUrl + encodeURIComponent($window.location.href);
+
           // OR IF YOU WANT TO SHARE A SPECIFIC URL, SET fb-url="http://youtUrl"
           }else{
-            var urlToShare = fbSharingModeUrl + encodeURIComponent(attrs.fbUrl);
+            urlToShare = fbSharingModeUrl + encodeURIComponent(attrs.fbUrl);
           }
           // POPUP SETTINGS
-          var w = 600, h = 400;          
+          var w = 600, h = 400;
           var left = (screen.width/2)-(w/2);
           var top = (screen.height/2)-(h/2);
           window.open(urlToShare,'Facebook','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+w+', height='+h+'');
-          
+
         })
       }
     };
@@ -54,7 +54,7 @@ angular.module('angular-social-network', [])
 
     return {
       link: function (scope, element, attrs) {
-        
+
         // CREATE FB DIV
         var fbElem = document.createElement('div');
         fbElem.id = "fb-root";
@@ -65,7 +65,7 @@ angular.module('angular-social-network', [])
         (function(d, s, id) {
           idScript = id;
           var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) 
+          if (d.getElementById(id))
             return;
           js = d.createElement(s);
           js.id = id;
@@ -85,15 +85,18 @@ angular.module('angular-social-network', [])
   }).directive('ngSocialNetworkGooglePlus', function () {
 
     return {
-      link: function (scope, element) {
-
-        window.___gcfg = {lang: 'fr'};
+      link: function (scope, element, attrs) {
+        var lang = 'en';
+        if(attrs.lang){
+          lang = attrs.lang;
+        }
+        window.___gcfg = {lang: lang};
         var po = document.createElement('script');
         po.type = 'text/javascript';
         po.async = true;
         po.defer = true;
         po.src = 'https://apis.google.com/js/platform.js';
-        po.innerHTML = '{lang: "fr"}';
+        po.innerHTML = '{lang: "' + lang + '"}';
         var s = element[0];
         s.parentNode.insertBefore(po, s);
       }
